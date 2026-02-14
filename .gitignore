@@ -1,0 +1,16 @@
+# venv
+venv/
+__pycache__/
+*.pyc
+
+# data
+data/
+*.json
+
+# logs
+*.log
+logs.txt
+
+# local config
+.env
+config.yaml

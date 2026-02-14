@@ -1,0 +1,65 @@
+app:
+  timezone: "Asia/Seoul"
+
+paths:
+  data_dir: "data"
+  watchlist_us: "data/watchlist_us.json"
+  watchlist_kr: "data/watchlist_kr.json"
+  positions: "data/positions.json"
+  state: "data/state.json"
+  log_file: "data/logs.txt"
+
+notifier:
+  telegram:
+    enabled: true
+    token_env: "XXXXXX"
+    chat_id_env: "XXXXXXXX"
+
+universe:
+  # 유니버스(종목추천) 결과로 감시할 종목 수
+  top_n_us: 80
+  top_n_kr: 80
+
+  # 일봉 기반 추천에 필요한 과거 데이터 확보 기간(일)
+  lookback_days: 365
+
+  # 유동성 필터
+  min_price_us: 5.0
+  min_dollar_vol_us: 50000000       # $50M/day (20일 평균)
+  dollar_vol_ma: 20
+
+  min_price_kr: 1000                 # 1000원 미만 제외(원하는대로)
+  min_value_traded_kr: 20000000000   # 200억/일(20일 평균) 원하는대로 조정
+
+  # 모멘텀(가중합)
+  mom_w_126: 0.6   # 6개월
+  mom_w_63: 0.4    # 3개월
+
+  # 추세 필터
+  trend_ma: 200
+  use_50_200_filter: true
+
+intraday:
+  interval: "5m"
+  lookback_days: 30
+  market: 
+    us_enabled: true
+    kr_enabled: false   # KR 5분봉 provider 붙이면 true로
+
+strategy:
+  short_ma: 20
+  long_ma: 60
+  confirm_bars: 1
+
+sell:
+  use_death_cross: true
+
+  use_trailing_stop: true
+  trailing_pct: 0.03
+
+  use_atr_stop: true
+  atr_n: 14
+  atr_k: 2.5
+
+  use_time_stop: false
+  max_hold_bars: 72
