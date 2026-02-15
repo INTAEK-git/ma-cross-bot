@@ -1,5 +1,6 @@
 import pandas as pd
 import requests
+from io import StringIO
 def fetch_sp500_symbols():
     """
     Wikipedia의 S&P500 구성종목 표를 자동 파싱
@@ -18,7 +19,7 @@ def fetch_sp500_symbols():
     r.raise_for_status()
 
     # read_html은 "URL" 대신 "HTML 문자열"도 받을 수 있음
-    tables = pd.read_html(r.text)
+    tables = pd.read_html(StringIO(r.text))
     df = tables[0]  # 첫 테이블이 보통 S&P500 구성표
     return df["Symbol"].tolist()
 
